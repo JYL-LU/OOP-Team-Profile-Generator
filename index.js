@@ -1,6 +1,9 @@
 //const { throwStatement } = require("@babel/types");
 const inquirer = require("inquirer");
 const jest = require("jest");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 
 function init() {
   addManager();
@@ -19,7 +22,7 @@ function addManager() {
       {
         type: "input",
         message: "What is the manager's employee ID?",
-        name: "employee_ID",
+        name: "id",
       },
 
       {
@@ -37,7 +40,25 @@ function addManager() {
     .then((data) => {
       //generate manager's HTML
       //employee section
-      addEmployee();
+      const newManager = new Manager(
+        data.name,
+        data.id,
+        data.email,
+        data.number
+      );
+
+      const newEngineer = new Engineer(
+        data.name,
+        data.id,
+        data.email,
+        data.github
+      );
+
+      const newIntern = new Intern(data.name, data.id, data.email, data.school);
+
+      console.log(newManager, newEngineer, newIntern);
+      //generateManagerHtml(data);
+      //addEmployee();
     });
 }
 
@@ -76,7 +97,7 @@ function addEngineer() {
       {
         type: "input",
         message: "What is the engineer's employee ID?",
-        name: "employee_ID",
+        name: "id",
       },
 
       {
@@ -96,4 +117,39 @@ function addEngineer() {
       addEmployee();
     });
 }
+
+function addIntern() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What is the name of your intern?",
+        name: "name",
+      },
+
+      {
+        type: "input",
+        message: "What is the engineer's employee ID?",
+        name: "id",
+      },
+
+      {
+        type: "input",
+        message: "Enter his/her email address",
+        name: "email",
+      },
+
+      {
+        type: "input",
+        message: "Which school does he/she go to?",
+        name: "school",
+      },
+    ])
+
+    .then((data) => {
+      //generate intern HTML
+      addEmployee();
+    });
+}
+
 init();
