@@ -4,6 +4,9 @@ const jest = require("jest");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const managerArr = [];
+const engineerArr = [];
+const internArr = [];
 
 function init() {
   addManager();
@@ -46,19 +49,11 @@ function addManager() {
         data.email,
         data.number
       );
+      managerArr.push(newManager);
 
-      const newEngineer = new Engineer(
-        data.name,
-        data.id,
-        data.email,
-        data.github
-      );
-
-      const newIntern = new Intern(data.name, data.id, data.email, data.school);
-
-      console.log(newManager, newEngineer, newIntern);
+      //console.log(newManager, newEngineer, newIntern);
       //generateManagerHtml(data);
-      //addEmployee();
+      addEmployee();
     });
 }
 
@@ -113,7 +108,16 @@ function addEngineer() {
       },
     ])
     .then((data) => {
+      const newEngineer = new Engineer(
+        data.name,
+        data.id,
+        data.email,
+        data.github
+      );
+
       //generate engineer HTML
+      engineerArr.push(newEngineer);
+
       addEmployee();
     });
 }
@@ -147,6 +151,8 @@ function addIntern() {
     ])
 
     .then((data) => {
+      const newIntern = new Intern(data.name, data.id, data.email, data.school);
+      internArr.push(newIntern);
       //generate intern HTML
       addEmployee();
     });
