@@ -7,6 +7,7 @@ const Intern = require("./lib/Intern");
 const managerArr = [];
 const engineerArr = [];
 const internArr = [];
+const fs = require("fs");
 
 function init() {
   addManager();
@@ -76,6 +77,7 @@ function addEmployee() {
         addIntern();
       } else if (data.position == "finished") {
         console.log("you have finished building your team!");
+        createFile();
       }
     });
 }
@@ -156,6 +158,105 @@ function addIntern() {
       //generate intern HTML
       addEmployee();
     });
+}
+
+function createFile() {
+  fs.writeFile(
+    "team.html",
+    `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+      </head>
+      <body>
+    <div>
+        <h1>
+            team members
+        </h1>
+    </div>
+    <div>
+        <div>
+            ${cardManager()}
+            ${cardEngineer()}
+            ${cardIntern()}
+        </div>
+    </div>
+    
+      </body>
+    </html>
+    
+  `,
+    function (err) {
+      if (err) throw err;
+    }
+  );
+}
+
+function cardManager() {
+  let manager = "";
+  for (let i = 0; i < managerArr.length; i++) {
+    const element = managerArr[i];
+    manager += `
+    <div>
+    <div>
+      <div>
+        <h2>${element.name}</h2>
+        <p>${element.role}</p>
+        <p>${element.id}</p>
+        <p>${element.email}</p>
+        <p>${element.number}</p>
+      </div>
+    </div>
+  </div>
+  `;
+  }
+  return manager;
+}
+
+function cardEngineer() {
+  let engineer = "";
+  for (let i = 0; i < engineerArr.length; i++) {
+    const element = engineerArr[i];
+    engineer += `
+      <div>
+      <div>
+        <div>
+          <h2>${element.name}</h2>
+          <p>${element.role}</p>
+          <p>${element.id}</p>
+          <p>${element.email}</p>
+          <p>${element.github}</p>
+        </div>
+      </div>
+    </div>
+    `;
+  }
+  return engineer;
+}
+
+function cardIntern() {
+  let intern = "";
+  for (let i = 0; i < internArr.length; i++) {
+    const element = internArr[i];
+    intern += `
+      <div>
+      <div>
+        <div>
+          <h2>${element.name}</h2>
+          <p>${element.role}</p>
+          <p>${element.id}</p>
+          <p>${element.email}</p>
+          <p>${element.school}</p>
+        </div>
+      </div>
+    </div>
+    `;
+  }
+  return intern;
 }
 
 init();
