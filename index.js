@@ -170,7 +170,7 @@ function createFile() {
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Team Members</title>
       </head>
       <body>
     <div>
@@ -182,6 +182,8 @@ function createFile() {
         <div>
             ${cardManager()}
             ${cardEngineer()}
+            ${cardEngineer()}
+            ${cardIntern()}
             ${cardIntern()}
         </div>
     </div>
@@ -201,14 +203,16 @@ function cardManager() {
   for (let i = 0; i < managerArr.length; i++) {
     const element = managerArr[i];
     manager += `
-    <div>
-    <div>
-      <div>
+    <divclass="col-4 mt-4">
+    <div class="card h-100">
+    <div class="card-header">
         <h2>${element.name}</h2>
+        <div class="card-body">
         <p>${element.role}</p>
         <p>${element.id}</p>
         <p>${element.email}</p>
         <p>${element.number}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -222,14 +226,16 @@ function cardEngineer() {
   for (let i = 0; i < engineerArr.length; i++) {
     const element = engineerArr[i];
     engineer += `
-      <div>
-      <div>
-        <div>
+    <divclass="col-4 mt-4">
+    <div class="card h-100">
+    <div class="card-header">
           <h2>${element.name}</h2>
+          <div class="card-body">
           <p>${element.role}</p>
           <p>${element.id}</p>
           <p>${element.email}</p>
           <p>${element.github}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -243,14 +249,16 @@ function cardIntern() {
   for (let i = 0; i < internArr.length; i++) {
     const element = internArr[i];
     intern += `
-      <div>
-      <div>
-        <div>
+      <divclass="col-4 mt-4">
+      <div class="card h-100">
+      <div class="card-header">
           <h2>${element.name}</h2>
+          <div class="card-body">
           <p>${element.role}</p>
           <p>${element.id}</p>
           <p>${element.email}</p>
           <p>${element.school}</p>
+          </div>
         </div>
       </div>
     </div>
