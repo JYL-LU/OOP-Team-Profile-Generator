@@ -1,4 +1,3 @@
-//const { throwStatement } = require("@babel/types");
 const inquirer = require("inquirer");
 const jest = require("jest");
 const Manager = require("./lib/Manager");
@@ -162,7 +161,7 @@ function addIntern() {
 
 function createFile() {
   fs.writeFile(
-    "team.html",
+    "./dist/team.html",
     `
     <!DOCTYPE html>
     <html lang="en">
@@ -170,27 +169,48 @@ function createFile() {
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        />
+        <script
+          src="https://kit.fontawesome.com/df3f087038.js"
+          crossorigin="anonymous"
+        ></script>
+    
+        <link rel="stylesheet" href="style.css" />
+    
         <title>Team Members</title>
       </head>
       <body>
-    <div>
-        <h1>
-            team members
-        </h1>
-    </div>
-    <div>
-        <div>
-            ${cardManager()}
-            ${cardEngineer()}
-            ${cardEngineer()}
-            ${cardIntern()}
-            ${cardIntern()}
-        </div>
-    </div>
+        <!-- As a heading -->
+        <nav class="navbar">
+          <div class="container-fluid justify-content-center">
+            <span class="navbar-brand mb-0 h1">Team Members</span>
+          </div>
+        </nav>
     
-      </body>
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+              <!--Team Cards-->
+                ${cardManager()}
+                ${cardEngineer()}
+                ${cardIntern()}
+                </div>
+            </div>
+        </main>
+    </body>
+    
     </html>
     
+
   `,
     function (err) {
       if (err) throw err;
@@ -203,15 +223,17 @@ function cardManager() {
   for (let i = 0; i < managerArr.length; i++) {
     const element = managerArr[i];
     manager += `
-    <divclass="col-4 mt-4">
+    <div class="col-4 mt-4">
     <div class="card h-100">
     <div class="card-header">
         <h2>${element.name}</h2>
+        <h4>Manager</h4>
+        <i class="material-icons">supervisor_account</i>
+
         <div class="card-body">
-        <p>${element.role}</p>
-        <p>${element.id}</p>
-        <p>${element.email}</p>
-        <p>${element.number}</p>
+        <p class="id">ID: ${element.id}</p>
+        <p class="email">Email: <a href="mailto:${element.email}">${element.email}</a></p>
+        <p class="office-number">Office Number: ${element.number}</p>
         </div>
       </div>
     </div>
@@ -226,15 +248,17 @@ function cardEngineer() {
   for (let i = 0; i < engineerArr.length; i++) {
     const element = engineerArr[i];
     engineer += `
-    <divclass="col-4 mt-4">
+    <div class="col-4 mt-4">
     <div class="card h-100">
     <div class="card-header">
           <h2>${element.name}</h2>
+          <h4>Engineer</h4>
+          <i class="material-icons">laptop</i>
+
           <div class="card-body">
-          <p>${element.role}</p>
-          <p>${element.id}</p>
-          <p>${element.email}</p>
-          <p>${element.github}</p>
+          <p class="id">ID: ${element.id}</p>
+          <p class="email">Email: <a href="mailto:${element.email}">${element.email}</a></p>
+          <p class="github">Github: <a href="https://github.com/${element.github}">${element.github}</a></p>
           </div>
         </div>
       </div>
@@ -249,15 +273,17 @@ function cardIntern() {
   for (let i = 0; i < internArr.length; i++) {
     const element = internArr[i];
     intern += `
-      <divclass="col-4 mt-4">
+      <div class="col-4 mt-4">
       <div class="card h-100">
       <div class="card-header">
           <h2>${element.name}</h2>
+          <h4>Intern</h4>
+          <i class="material-icons">school</i>
+          
           <div class="card-body">
-          <p>${element.role}</p>
-          <p>${element.id}</p>
-          <p>${element.email}</p>
-          <p>${element.school}</p>
+          <p class="id">ID: ${element.id}</p>
+          <p class="email">Email: <a href="mailto:${element.email}">${element.email}</a></p>
+          <p class="school">School: ${element.school}</p>
           </div>
         </div>
       </div>
